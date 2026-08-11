@@ -1,0 +1,12 @@
+tool: mocha
+language: javascript
+language_version: "22"
+technique: "CI/CD Integration Test"
+classification: "Test Execution"
+target_files: [../../test/]
+run:
+  command: "npx mocha 'test/**/*.test.js'"
+expects:
+  tests_pass: true
+verified_in_session: true
+verified_result: "10/10 real tests passed against src/app.js and src/app.js (via supertest)"
