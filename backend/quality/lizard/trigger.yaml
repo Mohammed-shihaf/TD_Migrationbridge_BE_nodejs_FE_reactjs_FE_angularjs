@@ -1,0 +1,12 @@
+tool: lizard
+language: javascript
+language_version: "22"
+technique: "Structural Analysis"
+classification: "Cyclomatic Complexity"
+target_files: [../../src/app.js]
+run:
+  command: "lizard src/app.js"
+expects:
+  complexity_report_generated: true
+verified_in_session: true
+verified_result: "calculateOrderTotal CCN 9 (26 NLOC), classifyOrderSize CCN 5 (13 NLOC); no thresholds exceeded"
