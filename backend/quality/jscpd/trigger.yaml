@@ -1,0 +1,12 @@
+tool: jscpd
+language: javascript
+language_version: "22"
+technique: "Code Quality Auditing"
+classification: "Code Duplication Detection"
+target_files: [../../src/app.js, ../../src/app.js]
+run:
+  command: "npx jscpd --min-lines 3 --min-tokens 20 --reporters console src/"
+expects:
+  duplicate_clone_detected: true
+verified_in_session: true
+verified_result: "1 real clone found: 3 lines / 36 tokens between app.js's export route and app.js::productsToCsv — a genuine copy-paste"
