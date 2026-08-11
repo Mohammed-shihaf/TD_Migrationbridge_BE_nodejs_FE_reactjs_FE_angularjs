@@ -1,0 +1,12 @@
+tool: stryker-js
+language: javascript
+language_version: "22"
+technique: "Mutation Testing"
+classification: "Mutation Score"
+target_files: [../../src/app.js, ../../stryker.conf.json]
+run:
+  command: "npx stryker run"
+expects:
+  mutants_generated_and_tested: true
+verified_in_session: true
+verified_result: "real mutation run: 70.31% mutation score, 45 killed, 12 survived, 7 no-coverage — genuine survivors at real boundary conditions (e.g. quantity < BULK_THRESHOLD vs <=)"
