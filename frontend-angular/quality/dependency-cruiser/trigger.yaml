@@ -1,0 +1,8 @@
+tool: dependency-cruiser
+language: typescript
+language_version: "Angular 18"
+technique: "Static Code Analysis"
+classification: "Circular Dependency Detection"
+target_files: [moduleA.ts, moduleB.ts]
+run: {command: "bash run_dependency_cruiser.sh"}
+expects: {circular_dependency_detected: true}
