@@ -1,0 +1,16 @@
+tool: pydriller
+language: javascript
+language_version: "22"
+technique: "Development Process Analysis"
+classification: "Code Churn"
+target_files: []
+run:
+  command: "python -c \"from pydriller import Repository; [print(c.hash) for c in Repository('.').traverse_commits()]\""
+notes: >
+  Reads this repo's own real git history directly; no fixture file needed.
+  Requires Python + pydriller, invoked against the repo root (one level up
+  from backend/).
+expects:
+  churn_report_generated: true
+verified_in_session: true
+verified_result: "mined real commits from this repo's actual git history (Python-side pydriller invocation, same tool as the mono-python-3.13-django branch's management command)"
