@@ -1,0 +1,8 @@
+tool: knip
+language: typescript
+language_version: "Angular 18"
+technique: "Static Code Analysis"
+classification: "Unused Export Detection"
+target_files: [index.ts, utils.ts]
+run: {command: "bash run_knip.sh"}
+expects: {unused_export_detected: true}

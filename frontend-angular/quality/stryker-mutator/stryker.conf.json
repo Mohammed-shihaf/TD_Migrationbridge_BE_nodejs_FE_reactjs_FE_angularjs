@@ -1,0 +1,6 @@
+{
+  "packageManager": "npm",
+  "testRunner": "jest",
+  "mutate": ["calculator.ts"],
+  "reporters": ["clear-text", "json"]
+}
