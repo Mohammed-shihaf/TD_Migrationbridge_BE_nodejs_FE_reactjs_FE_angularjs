@@ -1,0 +1,12 @@
+tool: npm-ls
+language: javascript
+language_version: "22"
+technique: "Dependency Risk (SCA)"
+classification: "Dependency Tree Audit"
+target_files: [../../package.json]
+run:
+  command: "npm ls --all --json"
+expects:
+  dependency_tree_reported: true
+verified_in_session: true
+verified_result: "real dependency tree printed for storefront-api, including genuine 'extraneous' warnings for dev-tool sub-dependencies not declared as direct deps"
