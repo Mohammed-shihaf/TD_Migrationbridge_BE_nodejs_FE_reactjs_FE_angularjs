@@ -1,0 +1,8 @@
+tool: ts-morph
+language: typescript
+language_version: "Angular 18"
+technique: "Multi-Function Path Tracking"
+classification: "AST-Based Structural Analysis"
+target_files: [target.ts, analyze.ts]
+run: {command: "npx ts-node analyze.ts"}
+expects: {ast_walked_successfully: true}
