@@ -1,0 +1,8 @@
+tool: biome
+language: typescript
+language_version: "Angular 18"
+technique: "Static Code Analysis"
+classification: "Lint / Rule Violations"
+target_files: [lintViolations.ts]
+run: {command: "bash run_biome.sh"}
+expects: {violations_detected: true}
