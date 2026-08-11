@@ -1,0 +1,8 @@
+tool: oss-review-toolkit
+language: typescript
+language_version: "Angular 18"
+technique: "Supply Chain Security"
+classification: "SBOM Generation"
+target_files: [package.json]
+run: {command: "bash run_oss_review_toolkit.sh"}
+expects: {sbom_generated: true}
