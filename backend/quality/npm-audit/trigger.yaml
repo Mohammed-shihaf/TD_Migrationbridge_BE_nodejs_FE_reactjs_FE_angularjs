@@ -1,0 +1,12 @@
+tool: npm-audit
+language: javascript
+language_version: "22"
+technique: "Dependency Risk (SCA)"
+classification: "Vulnerability Dependency Detection"
+target_files: [../../package.json, ../../package-lock.json]
+run:
+  command: "npm audit --json"
+expects:
+  known_cve_count_gt_0: true
+verified_in_session: true
+verified_result: "found real vulnerabilities: lodash@4.17.15 (high severity, GHSA-35jh-r3h4-6jhm command injection) — a real direct dependency, intentionally pinned old — plus a transitive moderate finding via nyc/istanbul-lib-processinfo"
