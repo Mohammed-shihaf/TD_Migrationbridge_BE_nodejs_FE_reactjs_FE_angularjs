@@ -1,0 +1,8 @@
+tool: grype
+language: typescript
+language_version: "Angular 18"
+technique: "Dependency Risk (SCA)"
+classification: "Vulnerability Dependency Detection"
+target_files: [package.json]
+run: {command: "bash run_grype.sh"}
+expects: {known_cve_count_gt_0: true}
