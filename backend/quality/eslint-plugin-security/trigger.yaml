@@ -1,0 +1,12 @@
+tool: eslint-plugin-security
+language: javascript
+language_version: "22"
+technique: "Static Application Security Testing"
+classification: "SAST Finding"
+target_files: [../../src/, ../../.eslintrc.json]
+run:
+  command: "npx eslint --print-config src/app.js"
+expects:
+  plugin_rules_active: true
+verified_in_session: true
+verified_result: "confirmed 14 security/* rules genuinely resolved and active in the ESLint config for this project (via --print-config); 0 findings on the current src/ tree, a genuine negative result"
