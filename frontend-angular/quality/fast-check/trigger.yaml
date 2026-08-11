@@ -1,0 +1,8 @@
+tool: fast-check
+language: typescript
+language_version: "Angular 18"
+technique: "Property-Based Testing"
+classification: "Randomized Input Generation"
+target_files: [reverseString.property.ts]
+run: {command: "npx ts-node reverseString.property.ts"}
+expects: {property_holds_across_generated_inputs: true}

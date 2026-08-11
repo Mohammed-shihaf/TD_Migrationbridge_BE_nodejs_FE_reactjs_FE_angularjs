@@ -1,0 +1,9 @@
+tool: jscpd
+version: "4.2.5"
+language: typescript
+language_version: "Angular 18"
+technique: "Code Quality Auditing"
+classification: "Code Duplication Detection"
+target_files: [retailOrderProcessor.ts, wholesaleOrderProcessor.ts]
+run: {command: "bash run_jscpd.sh"}
+expects: {duplicate_clone_detected: true}
