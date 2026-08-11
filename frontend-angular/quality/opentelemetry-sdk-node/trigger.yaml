@@ -1,0 +1,8 @@
+tool: opentelemetry-sdk-node
+language: typescript
+language_version: "Angular 18"
+technique: "CI/CD Integration Test"
+classification: "Observability Instrumentation"
+target_files: [instrumentedService.ts]
+run: {command: "npx ts-node instrumentedService.ts"}
+expects: {sdk_starts_and_shuts_down_cleanly: true}
