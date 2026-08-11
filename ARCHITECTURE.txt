@@ -1,0 +1,74 @@
+BUILD COMMANDS
+==============
+
+backend/          cd backend          && npm install && npm test
+frontend-react/   cd frontend-react   && npm install && npx vite build --base=/app/
+frontend-angular/ cd frontend-angular && npm install && npx ng build
+
+Full local run (from repo root):
+  1) cd frontend-angular && npm install && npx ng build
+                                            (writes dist/frontend-angular/browser/,
+                                             copy into backend/legacy-static/)
+  2) cd frontend-react   && npm install && npx vite build --base=/app/
+                                            (writes dist/, copy into backend/app-static/)
+  3) cd backend          && npm install && node src/app.js        (port 3000)
+
+Open http://localhost:3000/        -> JSON status: which app serves what
+Open http://localhost:3000/legacy/ -> Angular app (old stack)
+Open http://localhost:3000/app/    -> React app (new stack)
+Both call the SAME backend API at /api/widgets.
+
+
+ARCHITECTURE — HOW THE PIECES CONNECT
+======================================
+
+                    ┌───────────────────────────────────────┐
+                    │        backend/ (Node + Express)        │
+                    │                                           │
+                    │  GET  /api/widgets   (shared data API)    │
+                    │  GET  /health                              │
+                    │  GET  /             -> migration status    │
+                    │                                           │
+                    │  app.use('/legacy', static(legacy-static)) │
+                    │  app.use('/app',    static(app-static))    │
+                    └──────────┬───────────────────┬────────────┘
+                               │                   │
+                    serves     │                   │  serves
+                    prebuilt   │                   │  prebuilt
+                    static     │                   │  static
+                    bundle     │                   │  bundle
+                               │                   │
+              ┌────────────────▼───┐     ┌─────────▼─────────────┐
+              │ legacy-static/       │     │ app-static/            │
+              │ = frontend-angular/  │     │ = frontend-react/      │
+              │   build output       │     │   build output          │
+              │   (base href=/legacy/)│     │   (vite base=/app/)     │
+              │                       │     │                          │
+              │ served at /legacy/*   │     │ served at /app/*         │
+              │ fetches /api/widgets  │     │ fetches /api/widgets     │
+              └───────────────────────┘     └──────────────────────────┘
+
+- backend/  is a SINGLE Express app doing real route-based traffic
+  splitting: requests under /legacy/* are served the Angular app's static
+  build, requests under /app/* are served the React app's static build.
+  This is the actual "migration bridge" mechanism — a real backend
+  routing decision, not just two apps that happen to sit in one repo.
+- Both frontends are genuinely independent, separately-buildable apps
+  (frontend-angular/, frontend-react/) whose ONLY connection is that
+  they are built, then their output is copied into backend/legacy-static/
+  and backend/app-static/ respectively, and both call the same
+  /api/widgets endpoint on the shared backend — proving they coexist
+  against one backend during a live migration window, exactly like a
+  real incremental frontend migration (route-by-route cutover from an
+  old framework to a new one behind a single origin).
+- The base-href / vite-base settings on each frontend are what make the
+  route-splitting actually work: each app's asset paths are pre-scoped
+  to the path segment the backend will serve it under, so there is no
+  asset-resolution collision between the two apps sharing one origin.
+
+quality/  folders (backend/quality/, frontend-angular/quality/) hold the
+tool-trigger fixtures. JavaScript tools live once in backend/quality/
+(covering the shared backend + the JS toolchain frontend-react/ also
+uses -- frontend-react/ does not re-list them). TypeScript tools live
+once in frontend-angular/quality/ since that's a genuinely different
+toolset. No fixture or trigger file is duplicated between the two.

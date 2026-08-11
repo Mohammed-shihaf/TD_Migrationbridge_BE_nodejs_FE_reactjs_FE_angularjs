@@ -1,0 +1,8 @@
+tool: vitest
+language: typescript
+language_version: "Angular 18"
+technique: "Control Flow Testing"
+classification: "Statement / Branch Coverage"
+target_files: [calculator.ts, calculator.test.ts]
+run: {command: "bash run_vitest.sh"}
+expects: {coverage_report_generated: true}
