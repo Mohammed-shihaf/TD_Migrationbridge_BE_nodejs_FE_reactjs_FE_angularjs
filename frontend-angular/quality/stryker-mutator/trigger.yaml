@@ -1,0 +1,8 @@
+tool: stryker-mutator
+language: typescript
+language_version: "Angular 18"
+technique: "Mutation Testing"
+classification: "Mutation Score"
+target_files: [calculator.ts, calculator.test.ts]
+run: {command: "npx stryker run"}
+expects: {mutants_generated_and_tested: true}
