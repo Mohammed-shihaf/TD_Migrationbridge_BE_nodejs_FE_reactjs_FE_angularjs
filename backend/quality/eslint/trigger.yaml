@@ -1,0 +1,12 @@
+tool: eslint
+language: javascript
+language_version: "22"
+technique: "Code Quality Auditing"
+classification: "Static Lint Analysis"
+target_files: [../../src/]
+run:
+  command: "npx eslint src/"
+expects:
+  lint_report_generated: true
+verified_in_session: true
+verified_result: "ran clean against real src/ (0 errors under eslint:recommended + security + sonarjs recommended configs); an earlier config variant (sonarjs recommended-legacy) genuinely flagged X-Powered-By disclosure in app.js before the config was corrected to the non-deprecated ruleset"
