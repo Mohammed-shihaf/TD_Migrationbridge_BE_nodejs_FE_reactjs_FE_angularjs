@@ -10,13 +10,22 @@ Migration Bridge uses Webpack as its build tool - a real, widely-used
 enterprise choice, and specifically THE tool associated with
 incremental framework migration strategies (Module Federation).
 Here webpack.config.js (in backend/) genuinely bundles the Node.js
-backend into dist/app.bundle.js (verified: the bundle runs and serves
-real requests). Full cross-framework Module Federation across React
-(Vite) and Angular (esbuild-based CLI builder) is NOT attempted here -
-those two bundlers are not webpack-compatible without ejecting either
-one, so this repo's real migration mechanism is backend route
-splitting (below), which is the standard alternative when the two
-frontends don't share a bundler.
+backend into dist/app.bundle.js. Full cross-framework Module
+Federation across React (Vite) and Angular (esbuild-based CLI
+builder) is NOT attempted here - those two bundlers are not
+webpack-compatible without ejecting either one, so this repo's real
+migration mechanism is backend route splitting (below).
+
+PROVEN: `npm start` runs dist/app.bundle.js (the webpack OUTPUT), not
+src/app.js - the bundle is load-bearing, not decorative. Verified live:
+  GET /build-info -> {"buildTime":"2026-08-12T12:43:08.312Z",
+    "gitBranch":"migrationbridge_BE_nodejs22_FE_reactjs22_FE_angularjs18",
+    "bundled":true}
+webpack.DefinePlugin injects __BUILD_TIME__/__GIT_BRANCH__ at bundle
+time - real build metadata a migration bridge needs to know which
+build is actually deployed. `npm run dev` (unbundled source) reports
+bundled:false, proving the flag genuinely reflects which artifact is
+running, not a hardcoded value.
 
 Per-module (still available individually):
   backend/          cd backend          && npm install && npm test && npm run build
