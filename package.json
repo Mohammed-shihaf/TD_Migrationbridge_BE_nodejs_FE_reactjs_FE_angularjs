@@ -6,5 +6,9 @@
   "scripts": {
     "build": "npm --prefix backend run build && npm --prefix frontend-react run build && cd frontend-angular && npx ng build && cd ..",
     "test": "npm --prefix backend test && npm --prefix frontend-react test && cd frontend-angular && npx ng test --watch=false --browsers=ChromeHeadless && cd .."
+  },
+  "engines": {
+    "node": "22.x",
+    "shell": "bash>=5.2"
   }
 }
