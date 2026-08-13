@@ -8,7 +8,6 @@
     "test": "npm --prefix backend test && npm --prefix frontend-react test && cd frontend-angular && npx ng test --watch=false --browsers=ChromeHeadless && cd .."
   },
   "engines": {
-    "node": "20.x",
-    "shell": "bash>=5.2"
+    "node": "20.x"
   }
 }
