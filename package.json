@@ -3,8 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "engines": {
-    "node": "20.x",
-    "shell": "bash>=5.2"
+    "node": "20.x"
   },
   "description": "Root orchestration for the whole branch build - webpack bundles backend/, then each frontend runs its own real builder (Vite for React, Angular CLI/esbuild for Angular). See ARCHITECTURE.txt for why full JS Module Federation isn't used across these three different bundlers.",
   "scripts": {
