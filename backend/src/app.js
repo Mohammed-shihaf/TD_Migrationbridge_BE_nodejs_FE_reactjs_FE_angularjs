@@ -1,25 +1,27 @@
 "use strict";
-
 const express = require("express");
 const path = require("path");
+const widgetsRouter = require("./routes/widgets");
+const auditRouter = require("./routes/audit");
 
 const app = express();
 app.use(express.json());
 
-// Shared API — both the legacy Angular app and the new React app call
-// this same backend during the migration window.
-app.get("/api/widgets", (req, res) => {
-  res.json({ widgets: [{ id: 1, label: "Migration-bridge proof widget" }] });
-});
-
+app.use("/api/widgets", widgetsRouter);
+app.use("/api/audit", auditRouter);
 app.get("/health", (req, res) => res.json({ status: "ok" }));
 
-// Real route-based traffic split: this is what makes the branch a
-// genuine "migration bridge", not two disconnected apps. /legacy/*
-// serves the old Angular app; /app/* serves the new React app. A real
-// org would route a percentage of traffic or specific user cohorts to
-// each during an incremental migration - this static path split is the
-// minimal, real version of that mechanism.
+// __BUILD_TIME__/__GIT_BRANCH__ are injected by webpack's DefinePlugin
+// (backend/webpack.config.js) only in the bundled dist/app.bundle.js;
+// undefined when running the source directly via `npm run dev`.
+app.get("/build-info", (req, res) => {
+  res.json({
+    buildTime: typeof __BUILD_TIME__ !== "undefined" ? __BUILD_TIME__ : null,
+    gitBranch: typeof __GIT_BRANCH__ !== "undefined" ? __GIT_BRANCH__ : null,
+    bundled: typeof __BUILD_TIME__ !== "undefined",
+  });
+});
+
 app.use("/legacy", express.static(path.join(__dirname, "..", "legacy-static")));
 app.get("/legacy/*", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "legacy-static", "index.html"));
