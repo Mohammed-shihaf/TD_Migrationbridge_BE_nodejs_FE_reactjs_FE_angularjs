@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# shell-version: bash 5.2.15
 # Requires bash >= 4.0 (uses associative arrays)
 set -euo pipefail
 
