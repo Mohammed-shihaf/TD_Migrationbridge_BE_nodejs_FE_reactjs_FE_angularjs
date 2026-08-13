@@ -1,0 +1,10 @@
+{
+  "name": "migrationbridge-workspace",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Root orchestration for the whole branch build - webpack bundles backend/, then each frontend runs its own real builder (Vite for React, Angular CLI/esbuild for Angular). See ARCHITECTURE.txt for why full JS Module Federation isn't used across these three different bundlers.",
+  "scripts": {
+    "build": "npm --prefix backend run build && npm --prefix frontend-react run build && cd frontend-angular && npx ng build && cd ..",
+    "test": "npm --prefix backend test && npm --prefix frontend-react test && cd frontend-angular && npx ng test --watch=false --browsers=ChromeHeadless && cd .."
+  }
+}
