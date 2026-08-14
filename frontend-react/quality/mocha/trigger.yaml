@@ -1,0 +1,12 @@
+tool: mocha
+language: javascript
+language_version: "24"
+technique: "CI/CD Integration Test"
+classification: "Test Execution"
+target_files: [../../test/]
+run:
+  command: "npx mocha 'test/**/*.test.js'"
+expects:
+  tests_pass: true
+verified_in_session: true
+verified_result: "real tests passed against src/widgets.js and src/audit.js (widgets.test.js, audit.test.js)"
