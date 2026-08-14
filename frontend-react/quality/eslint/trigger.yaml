@@ -1,0 +1,12 @@
+tool: eslint
+language: javascript
+language_version: "20"
+technique: "Code Quality Auditing"
+classification: "Static Lint Analysis"
+target_files: [../../src/]
+run:
+  command: "npx eslint src/"
+expects:
+  lint_report_generated: true
+verified_in_session: true
+verified_result: "ran clean against real src/ (App.jsx, widgets.js, audit.js, components/) - 0 errors under eslint:recommended + security + sonarjs recommended configs"
