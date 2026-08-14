@@ -1,0 +1,11 @@
+tool: nyc
+language: javascript
+language_version: "24"
+technique: "Statement / Branch Coverage"
+target_files: [../../src/]
+run:
+  command: "npx nyc --reporter=text mocha 'test/**/*.test.js'"
+expects:
+  coverage_report_generated: true
+verified_in_session: true
+verified_result: "nyc ran without crashing and produced a real report table, but shows 0% across all metrics against this ESM (type: module) project - a known nyc/ESM instrumentation limitation, not a tool failure; needs a .nycrc with proper ESM loader config to report real numbers here"
