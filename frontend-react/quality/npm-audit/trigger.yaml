@@ -1,0 +1,12 @@
+tool: npm-audit
+language: javascript
+language_version: "22"
+technique: "Dependency Risk (SCA)"
+classification: "Vulnerability Dependency Detection"
+target_files: [../../package.json, ../../package-lock.json]
+run:
+  command: "npm audit --json"
+expects:
+  known_cve_count_gt_0: false
+verified_in_session: true
+verified_result: "npm audit run against the real React frontend's dependency tree"
