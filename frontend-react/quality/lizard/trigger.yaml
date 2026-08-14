@@ -1,0 +1,12 @@
+tool: lizard
+language: javascript
+language_version: "20"
+technique: "Structural Analysis"
+classification: "Cyclomatic Complexity"
+target_files: [../../src/widgets.js]
+run:
+  command: "lizard src/widgets.js"
+expects:
+  complexity_report_generated: true
+verified_in_session: true
+verified_result: "real complexity report generated for widgets.js; no thresholds exceeded"
