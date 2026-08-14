@@ -1,7 +1,18 @@
 {
   "$schema": "./node_modules/@stryker-mutator/core/schema/stryker-schema.json",
   "testRunner": "mocha",
-  "mutate": ["src/widgets.js"],
-  "mochaOptions": { "spec": ["test/widgets.test.js"] },
-  "reporters": ["clear-text", "progress"]
+  "mutate": [
+    "src/audit.js",
+    "src/widgets.js"
+  ],
+  "mochaOptions": {
+    "spec": [
+      "test/audit.test.js",
+      "test/widgets.test.js"
+    ]
+  },
+  "reporters": [
+    "clear-text",
+    "progress"
+  ]
 }

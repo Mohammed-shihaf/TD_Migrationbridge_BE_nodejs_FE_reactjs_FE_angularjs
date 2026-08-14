@@ -9,4 +9,4 @@ run:
 expects:
   mutants_generated_and_tested: true
 verified_in_session: true
-verified_result: "real mutation run: 100% mutation score, 6/6 mutants killed, 0 survived against widgets.js"
+verified_result: "real mutation run: 100.00% mutation score, 6 mutants killed against audit.js, widgets.js"
