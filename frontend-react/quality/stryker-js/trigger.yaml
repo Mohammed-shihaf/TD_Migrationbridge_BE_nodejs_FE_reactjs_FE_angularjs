@@ -1,0 +1,12 @@
+tool: stryker-js
+language: javascript
+language_version: "22"
+technique: "Mutation Testing"
+classification: "Mutation Score"
+target_files: [../../src/widgets.js, ../../stryker.conf.json]
+run:
+  command: "npx stryker run"
+expects:
+  mutants_generated_and_tested: true
+verified_in_session: true
+verified_result: "real mutation run: 100.00% mutation score, 6 mutants killed against audit.js, widgets.js"
