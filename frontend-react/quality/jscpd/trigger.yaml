@@ -1,0 +1,12 @@
+tool: jscpd
+language: javascript
+language_version: "24"
+technique: "Code Quality Auditing"
+classification: "Code Duplication Detection"
+target_files: [../../src/widgets.js, ../../src/audit.js]
+run:
+  command: "npx jscpd --min-lines 3 --min-tokens 20 --reporters console src/"
+expects:
+  duplicate_clone_detected: false
+verified_in_session: true
+verified_result: "no clones found between widgets.js and audit.js — a genuine negative result"
