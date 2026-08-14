@@ -1,0 +1,12 @@
+tool: eslint-plugin-sonarjs
+language: javascript
+language_version: "18"
+technique: "Code Quality Auditing"
+classification: "Code Smell Detection"
+target_files: [../../src/widgets.js, ../../src/audit.js]
+run:
+  command: "npx eslint src/"
+expects:
+  code_smell_detected: true
+verified_in_session: true
+verified_result: "sonarjs rules evaluated against widgets.js/audit.js"
